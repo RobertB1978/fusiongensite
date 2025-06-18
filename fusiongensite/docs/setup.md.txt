@@ -1,0 +1,8 @@
+# Instrukcja Instalacji FusionGenSite
+
+1. Utwórz folder `fusiongensite` na Pulpicie.
+2. Skopiuj wszystkie pliki i foldery według dokumentacji.
+3. Otwórz `index.html` w przeglądarce, aby sprawdzić działanie.
+4. (Opcjonalnie) Uruchom prosty serwer:
+   ```bash
+   python -m http.server 8000

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionGenSite - Generator Aplikacji Web</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/components.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="logo">🔥 FusionGenSite</h1>
+                <nav class="nav">
+                    <a href="#generator">Generator</a>
+                    <a href="#templates">Szablony</a>
+                    <a href="#docs">Docs</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>Twórz Nowoczesne Aplikacje Web w Minuty</h2>
+                <p>Od prostych stron po zaawansowane dashboardy - wszystko w jednym miejscu</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showGenerator()">Rozpocznij Teraz</button>
+                    <button class="btn btn-secondary" onclick="showTemplates()">Zobacz Szablony</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generator Section -->
+        <section id="generator" class="generator" style="display: none;">
+            <div class="container">
+                <h3>Generator Aplikacji</h3>
+                <div class="generator-interface">
+                    <div class="file-upload">
+                        <input type="file" id="fileUpload" accept=".html,.css,.js,.json" multiple>
+                        <label for="fileUpload">Wrzuć pliki lub wybierz szablon</label>
+                    </div>
+                    <div class="template-selector">
+                        <select id="templateSelect">
+                            <option value="">Wybierz szablon...</option>
+                            <option value="landing">Landing Page</option>
+                            <option value="dashboard">Dashboard</option>
+                            <option value="portfolio">Portfolio</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateSite()">Generuj Stronę</button>
+                </div>
+                <div id="preview" class="preview"></div>
+            </div>
+        </section>
+
+        <!-- Templates Section -->
+        <section id="templates" class="templates" style="display: none;">
+            <div class="container">
+                <h3>Gotowe Szablony</h3>
+                <div class="template-grid">
+                    <div class="template-card" data-template="landing">
+                        <img src="public/assets/images/template-landing.jpg" alt="Landing Page">
+                        <h4>Landing Page</h4>
+                        <p>Profesjonalna strona sprzedażowa</p>
+                        <button class="btn btn-outline">Wybierz</button>
+                    </div>
+                    <div class="template-card" data-template="dashboard">
+                        <img src="public/assets/images/template-dashboard.jpg" alt="Dashboard">
+                        <h4>Dashboard</h4>
+                        <p>Panel administracyjny z wykresami</p>
+                        <button class="btn btn-outline">Wybierz</button>
+                    </div>
+                    <div class="template-card" data-template="portfolio">
+                        <img src="public/assets/images/template-portfolio.jpg" alt="Portfolio">
+                        <h4>Portfolio</h4>
+                        <p>Elegancka prezentacja prac</p>
+                        <button class="btn btn-outline">Wybierz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 FusionGenSite. Zbudowane z ❤️

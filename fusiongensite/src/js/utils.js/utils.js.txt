@@ -1,0 +1,30 @@
+// Narzędzia pomocnicze
+const Utils = {
+    generateId: () => Math.random().toString(36).substr(2, 9),
+    formatDate: (date) => {
+        return new Intl.DateTimeFormat('pl-PL').format(date);
+    },
+    debounce: (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    validateFile: (file, allowedTypes = ['text/html', 'text/css', 'application/javascript']) => {
+        return allowedTypes.includes(file.type);
+    },
+    fileToBase64: (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+};
+window.Utils = Utils;

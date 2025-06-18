@@ -1,0 +1,43 @@
+# FusionGenSite - Generator Nowoczesnych Aplikacji Web
+
+## 📁 Struktura Projektu
+
+fusiongensite/
+├── README.md                   # Ten plik - dokumentacja projektu
+├── package.json               # Konfiguracja npm/dependencies
+├── .gitignore                 # Co ignorować w Git
+├── index.html                 # Główna strona startowa
+├── 
+├── src/                       # Kod źródłowy
+│   ├── components/            # Komponenty wielokrotnego użytku
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   └── TemplateSelector.js
+│   ├── templates/             # Gotowe szablony
+│   │   ├── landing/
+│   │   ├── dashboard/
+│   │   └── portfolio/
+│   ├── styles/                # Style CSS
+│   │   ├── main.css
+│   │   ├── components.css
+│   │   └── themes.css
+│   └── js/                    # JavaScript
+│       ├── app.js
+│       ├── generator.js
+│       └── utils.js
+├── 
+├── public/                    # Pliki statyczne (gotowe do serwowania)
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── fonts/
+│   └── generated/             # Wygenerowane strony
+├── 
+├── docs/                      # Dokumentacja
+│   ├── setup.md
+│   ├── usage.md
+│   └── api.md
+├── 
+└── scripts/                   # Skrypty automatyzacji
+    ├── build.js
+    └── deploy.js

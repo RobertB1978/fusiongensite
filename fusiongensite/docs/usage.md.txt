@@ -1,0 +1,9 @@
+
+### `usage.md`
+```markdown
+# Jak Używać FusionGenSite
+
+- Otwórz stronę główną
+- Wybierz szablon lub wrzuć własne pliki
+- Kliknij „Generuj stronę” i pobierz gotowy plik
+- Szczegóły w dokumentacji projektu

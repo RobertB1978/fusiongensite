@@ -1,0 +1,114 @@
+// Główna logika aplikacji
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥 FusionGenSite załadowany!');
+    // Inicjalizacja komponentów
+    initNavigation();
+    initFileUpload();
+    initTemplateCards();
+});
+
+function showGenerator() {
+    hideAllSections();
+    document.getElementById('generator').style.display = 'block';
+    scrollToSection('generator');
+}
+function showTemplates() {
+    hideAllSections();
+    document.getElementById('templates').style.display = 'block';
+    scrollToSection('templates');
+}
+function hideAllSections() {
+    const sections = ['generator', 'templates'];
+    sections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) section.style.display = 'none';
+    });
+}
+function scrollToSection(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+// Nawigacja
+function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href === '#generator') {
+                showGenerator();
+            } else if (href === '#templates') {
+                showTemplates();
+            }
+        });
+    });
+}
+// Upload plików
+function initFileUpload() {
+    const fileInput = document.getElementById('fileUpload');
+    const fileUploadArea = document.querySelector('.file-upload');
+    fileUploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.classList.add('drag-over');
+    });
+    fileUploadArea.addEventListener('dragleave', function() {
+        this.classList.remove('drag-over');
+    });
+    fileUploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        handleFiles(files);
+    });
+    fileInput.addEventListener('change', function() {
+        handleFiles(this.files);
+    });
+}
+function handleFiles(files) {
+    console.log('Załadowano pliki:', files);
+    Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            console.log(`Plik ${file.name} załadowany:`, e.target.result);
+        };
+        reader.readAsText(file);
+    });
+    showNotification('Pliki zostały załadowane!', 'success');
+}
+// Karty szablonów
+function initTemplateCards() {
+    const templateCards = document.querySelectorAll('.template-card');
+    templateCards.forEach(card => {
+        const button = card.querySelector('.btn');
+        button.addEventListener('click', function() {
+            const template = card.getAttribute('data-template');
+            selectTemplate(template);
+        });
+    });
+}
+function selectTemplate(templateName) {
+    console.log('Wybrano szablon:', templateName);
+    const templateSelect = document.getElementById('templateSelect');
+    templateSelect.value = templateName;
+    showGenerator();
+    showNotification(`Wybrano szablon: ${templateName}`, 'success');
+}
+function showNotification(message, type = 'success') {
+    // Usuń poprzednie powiadomienia
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add('show'), 100);
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+window.showGenerator = showGenerator;
+window.showTemplates = showTemplates;
+window.generateSite = generateSite; // Będzie w generator.js

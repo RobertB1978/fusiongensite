@@ -1,0 +1,103 @@
+// Generator stron - główna logika
+function generateSite() {
+    const templateSelect = document.getElementById('templateSelect');
+    const template = templateSelect.value;
+    if (!template) {
+        showNotification('Wybierz szablon lub wrzuć pliki!', 'error');
+        return;
+    }
+    console.log('Generowanie strony dla szablonu:', template);
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '<div class="loading"></div> Generowanie...';
+    setTimeout(() => {
+        const generatedHTML = generateTemplateHTML(template);
+        displayPreview(generatedHTML);
+        showNotification('Strona została wygenerowana!', 'success');
+    }, 1500);
+}
+function generateTemplateHTML(template) {
+    const templates = {
+        landing: `
+            <div class="generated-site">
+                <h2>🚀 Landing Page</h2>
+                <p>Profesjonalna strona sprzedażowa z sekcjami:</p>
+                <ul>
+                    <li>Hero z call-to-action</li>
+                    <li>Sekcja funkcji</li>
+                    <li>Testimonialne</li>
+                    <li>Pricing</li>
+                    <li>Kontakt</li>
+                </ul>
+                <div class="preview-actions">
+                    <button class="btn btn-primary" onclick="downloadSite('landing')">Pobierz HTML</button>
+                    <button class="btn btn-secondary" onclick="openFullPreview('landing')">Podgląd</button>
+                </div>
+            </div>
+        `,
+        dashboard: `
+            <div class="generated-site">
+                <h2>📊 Dashboard</h2>
+                <p>Panel administracyjny z funkcjami:</p>
+                <ul>
+                    <li>Wykresy i statystyki</li>
+                    <li>Tabele danych</li>
+                    <li>Panel nawigacyjny</li>
+                    <li>Ustawienia użytkownika</li>
+                    <li>Responsywny design</li>
+                </ul>
+                <div class="preview-actions">
+                    <button class="btn btn-primary" onclick="downloadSite('dashboard')">Pobierz HTML</button>
+                    <button class="btn btn-secondary" onclick="openFullPreview('dashboard')">Podgląd</button>
+                </div>
+            </div>
+        `,
+        portfolio: `
+            <div class="generated-site">
+                <h2>🎨 Portfolio</h2>
+                <p>Elegancka prezentacja prac zawiera:</p>
+                <ul>
+                    <li>Galerię projektów</li>
+                    <li>Sekcję "O mnie"</li>
+                    <li>Lista umiejętności</li>
+                    <li>Formularz kontaktowy</li>
+                    <li>Animacje i efekty</li>
+                </ul>
+                <div class="preview-actions">
+                    <button class="btn btn-primary" onclick="downloadSite('portfolio')">Pobierz HTML</button>
+                    <button class="btn btn-secondary" onclick="openFullPreview('portfolio')">Podgląd</button>
+                </div>
+            </div>
+        `
+    };
+    return templates[template] || '<p>Szablon nie został znaleziony</p>';
+}
+function displayPreview(html) {
+    const preview = document.getElementById('preview');
+    preview.innerHTML = html;
+}
+function downloadSite(template) {
+    console.log('Pobieranie strony:', template);
+    const fullHTML = generateFullSiteHTML(template);
+    const blob = new Blob([fullHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${template}-site.html`;
+    a.click();
+    showNotification(`Strona ${template} została pobrana!`, 'success');
+}
+function openFullPreview(template) {
+    console.log('Otwieranie podglądu:', template);
+    const fullHTML = generateFullSiteHTML(template);
+    const newWindow = window.open();
+    newWindow.document.write(fullHTML);
+    newWindow.document.close();
+}
+function generateFullSiteHTML(template) {
+    // Tutaj będą pełne szablony HTML
+    // ... [jeśli chcesz pełną treść szablonów, daj znać]
+    return `<html><body><h1>Szablon: ${template}</h1></body></html>`;
+}
+window.generateSite = generateSite;
+window.downloadSite = downloadSite;
+window.openFullPreview = openFullPreview;
